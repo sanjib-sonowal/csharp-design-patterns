@@ -4,6 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
+        // Creational Patterns
+
         #region Singleton Pattern
         // Get the single instance of the Singleton class.
         Singleton singleton1 = Singleton.Instance;
@@ -45,6 +47,51 @@ class Program
         shape3?.Draw();
         Console.WriteLine();
         #endregion
+
+        #region Builder Pattern
+        Console.WriteLine("Executing Builder Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        IHouseBuilder builder = new ConcreteHouseBuilder();
+        HouseDirector director = new HouseDirector(builder);
+
+        // Build a simple house
+        director.ConstructSimpleHouse();
+        House simpleHouse = builder.GetHouse();
+        Console.WriteLine(simpleHouse);
+
+        // Build a luxury house
+        builder = new ConcreteHouseBuilder(); // Reset the builder
+        director = new HouseDirector(builder);
+        director.ConstructLuxuryHouse();
+        House luxuryHouse = builder.GetHouse();
+        Console.WriteLine(luxuryHouse);
+        Console.WriteLine();
+        #endregion
+
+        #region Prototype Pattern
+        Console.WriteLine("Executing Prototype Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // Create an original Circle
+        Circle1 originalCircle = new Circle1 { Color = "Red", Radius = 10 };
+        Console.WriteLine("Original: " + originalCircle);
+
+        // Clone the Circle
+        Circle1 clonedCircle = (Circle1)originalCircle.Clone();
+        clonedCircle.Color = "Blue"; // Change the color of the cloned circle
+        Console.WriteLine("Cloned: " + clonedCircle);
+
+        // Create an original Rectangle
+        Rectangle1 originalRectangle = new Rectangle1 { Color = "Green", Width = 20, Height = 15 };
+        Console.WriteLine("Original: " + originalRectangle);
+
+        // Clone the Rectangle
+        Rectangle1 clonedRectangle = (Rectangle1)originalRectangle.Clone();
+        clonedRectangle.Color = "Yellow"; // Change the color of the cloned rectangle
+        Console.WriteLine("Cloned: " + clonedRectangle);
+        Console.WriteLine();
+        #endregion
+
+        // Behavioral Patterns
 
         #region Observer Pattern
         Console.WriteLine("Executing Observer Pattern >>>>>");
@@ -129,6 +176,50 @@ class Program
         // Turn the light off
         remoteControl.SetCommand(lightOff);
         remoteControl.PressButton();
+        Console.WriteLine();
+        #endregion
+
+        #region Iterator Pattern
+        Console.WriteLine("Executing Iterator Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // Create a book collection
+        BookCollection collection = new BookCollection();
+        collection.AddBook(new Book("The Catcher in the Rye"));
+        collection.AddBook(new Book("To Kill a Mockingbird"));
+        collection.AddBook(new Book("1984"));
+
+        // Create an iterator for the book collection
+        IBookIterator iterator = collection.CreateIterator();
+
+        // Iterate over the collection
+        while (iterator.HasNext())
+        {
+            Book book = iterator.Next();
+            Console.WriteLine(book.Title);
+        }
+        Console.WriteLine();
+        #endregion
+
+        #region Chain of Responsibility Pattern
+        Console.WriteLine("Executing Chain of Responsibility Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // Create handlers
+        SupportHandler basicHandler = new BasicSupportHandler();
+        SupportHandler technicalHandler = new TechnicalSupportHandler();
+        SupportHandler billingHandler = new BillingSupportHandler();
+
+        // Set up the chain of responsibility
+        basicHandler.SetNextHandler(technicalHandler);
+        technicalHandler.SetNextHandler(billingHandler);
+
+        // Create and process support requests
+        SupportRequest basicRequest = new SupportRequest("Basic", "Password reset");
+        SupportRequest technicalRequest = new SupportRequest("Technical", "System not responding");
+        SupportRequest billingRequest = new SupportRequest("Billing", "Invoice discrepancy");
+
+        basicHandler.HandleRequest(basicRequest);
+        basicHandler.HandleRequest(technicalRequest);
+        basicHandler.HandleRequest(billingRequest);
         Console.WriteLine();
         #endregion
     }
