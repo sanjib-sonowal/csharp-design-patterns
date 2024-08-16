@@ -23,7 +23,7 @@ The Builder pattern is a creational design pattern that separates the constructi
 ### Prototype
 The Prototype pattern is a creational design pattern that allows for the creation of new objects by copying an existing object, known as the prototype. It involves defining a prototype interface with a method to clone itself. This pattern is useful for creating new instances quickly and efficiently, especially when the cost of creating an object from scratch is high or when you need to create multiple instances with similar configurations.
 
-## Strucrural Patterns
+## Structural Patterns
 Purpose: Focus on the composition of classes or objects. Simplifying the design by organizing and structuring relationships between classes and objects, often using inheritance or composition.
 
 Focus: These patterns focus on how objects and classes are organized and composed.
