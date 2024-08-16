@@ -1,18 +1,13 @@
 # C# Design Patterns
 Sample C# code of various design patterns
 
-## Categories
+## Categories: Creational Patterns, Structural Patterns and Behavioral Patterns
+
 ## Creational Patterns
 Purpose: Creational patterns are concerned with the process of object creation. They abstract the instantiation process, making the system independent of how its objects are created, composed, and represented.
 
 Focus: These patterns focus on the best way to create objects, whether it’s by controlling the instantiation process, using constructors, or by using some other means like cloning, or lazily initializing objects.
 
-## Behavioral Patterns
-Purpose: Behavioral patterns are concerned with communication between objects. They focus on how objects interact and communicate with each other, ensuring that the system remains flexible and that objects are loosely coupled.
-
-Focus: These patterns are more about the responsibilities of objects and how they cooperate. They help in defining the flow of control in the system.
-
-## Design Patterns
 ### Singleton
 The Singleton pattern is a creational design pattern that ensures a class has only one instance and provides a global point of access to it. This pattern restricts the instantiation of a class to a single object, which can be accessed from anywhere in the application. It is useful for managing resources or configurations that should be shared across the system, such as a logging service or a configuration manager.
 
@@ -28,14 +23,33 @@ The Builder pattern is a creational design pattern that separates the constructi
 ### Prototype
 The Prototype pattern is a creational design pattern that allows for the creation of new objects by copying an existing object, known as the prototype. It involves defining a prototype interface with a method to clone itself. This pattern is useful for creating new instances quickly and efficiently, especially when the cost of creating an object from scratch is high or when you need to create multiple instances with similar configurations.
 
-### Observer
-The Observer pattern is a behavioral design pattern that defines a one-to-many dependency between objects, where a change in one object (the subject) automatically notifies and updates all dependent objects (observers). It allows for a decoupled way to manage dependencies, ensuring that all observers are kept up-to-date with the subject's state without the subject needing to know the details of its observers. This pattern is useful for implementing distributed event-handling systems.
+## Strucrural Patterns
+Purpose: Focus on the composition of classes or objects. Simplifying the design by organizing and structuring relationships between classes and objects, often using inheritance or composition.
+
+Focus: These patterns focus on how objects and classes are organized and composed.
+
+### Adapter
+The Adapter pattern is a structural design pattern that enables objects with incompatible interfaces to work together. It involves creating an adapter class that wraps an existing class and translates its interface into one that clients expect, allowing for seamless integration without changing the existing code.
 
 ### Decorator
 The Decorator pattern is a structural design pattern that allows you to dynamically add or modify the behavior of an object at runtime without altering its structure. It involves creating a set of decorator classes that wrap a concrete component, extending its functionalities while keeping the original object's interface intact. This pattern is useful for adding features to objects in a flexible and reusable manner.
 
-### Adapter
-The Adapter pattern is a structural design pattern that enables objects with incompatible interfaces to work together. It involves creating an adapter class that wraps an existing class and translates its interface into one that clients expect, allowing for seamless integration without changing the existing code.
+### Facade
+The Facade pattern is a structural design pattern that provides a simplified, unified interface to a complex subsystem, making it easier to use. It hides the complexities of the underlying components and interactions, allowing clients to interact with the system through a single interface.
+
+### Bridge
+The Bridge pattern is a structural design pattern that separates an abstraction from its implementation, allowing both to evolve independently. It decouples an abstraction (e.g., a high-level interface) from its implementation (e.g., low-level details) by using a bridge interface.
+
+### Composite
+The Composite pattern is a structural design pattern that allows you to compose objects into tree structures to represent part-whole hierarchies. It enables clients to treat individual objects and compositions of objects uniformly.
+
+## Behavioral Patterns
+Purpose: Behavioral patterns are concerned with communication between objects. They focus on how objects interact and communicate with each other, ensuring that the system remains flexible and that objects are loosely coupled.
+
+Focus: These patterns are more about the responsibilities of objects and how they cooperate. They help in defining the flow of control in the system.
+
+### Observer
+The Observer pattern is a behavioral design pattern that defines a one-to-many dependency between objects, where a change in one object (the subject) automatically notifies and updates all dependent objects (observers). It allows for a decoupled way to manage dependencies, ensuring that all observers are kept up-to-date with the subject's state without the subject needing to know the details of its observers. This pattern is useful for implementing distributed event-handling systems.
 
 ### Strategy
 The Strategy pattern is a behavioral design pattern that defines a family of algorithms, encapsulates each one, and makes them interchangeable. It allows clients to choose and switch between algorithms or strategies at runtime, promoting flexibility and separation of concerns by decoupling the algorithm implementation from the code that uses it.
@@ -48,3 +62,12 @@ The Iterator pattern is a behavioral design pattern that provides a way to seque
 
 ### Chain of Responsibility
 The Chain of Responsibility pattern is a behavioral design pattern that allows a request to be passed along a chain of handlers. Each handler in the chain either processes the request or passes it to the next handler in the chain. This pattern decouples the sender of a request from its receivers, allowing multiple handlers to process the request in a flexible and dynamic manner.
+
+### Template Method
+The Template Method pattern is a behavioral design pattern that defines the skeleton of an algorithm in a base class, but lets subclasses override specific steps of the algorithm without changing its structure.
+
+### Memento
+The Memento pattern is a behavioral design pattern that allows an object's internal state to be captured and restored without exposing its implementation details. This pattern is useful for implementing features like undo/redo functionality.
+
+### Interpreter
+The Interpreter pattern is a behavioral design pattern that defines a grammar for a language and provides an interpreter to interpret sentences in that language. It is used to evaluate expressions or commands based on a defined set of rules.

@@ -5,7 +5,6 @@ class Program
     static void Main(string[] args)
     {
         // Creational Patterns
-
         #region Singleton Pattern
         // Get the single instance of the Singleton class.
         Singleton singleton1 = Singleton.Instance;
@@ -29,6 +28,13 @@ class Program
         Console.WriteLine();
         #endregion
 
+        #region Singleton Pattern - 1
+        Console.WriteLine("Executing Singleton Pattern - 1 >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        Logger.Instance.Log("This is a log message.");
+        Console.WriteLine();
+        #endregion
+
         #region Factory Pattern
         Console.WriteLine("Executing Factory Pattern >>>>>");
         Console.WriteLine("----------------------------------------------------");
@@ -45,6 +51,31 @@ class Program
         // Get an object of Rectangle and call its Draw method.
         IShape shape3 = shapeFactory.GetShape("rectangle");
         shape3?.Draw();
+        Console.WriteLine();
+        #endregion
+
+        #region Factory Pattern - 1
+        Console.WriteLine("Executing Factory Pattern - 1 >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        Document doc = DocumentFactory.CreateDocument("pdf");
+        doc.Open();  // Output: Opening PDF document.
+        Console.WriteLine();
+        #endregion
+
+        #region Abstract Factory Pattern
+        Console.WriteLine("Executing Abstract Factory Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // Create a Light theme UI
+        IUIFactory lightFactory = new LightThemeFactory();
+        Client lightClient = new Client(lightFactory);
+        lightClient.RenderUI();
+
+        Console.WriteLine();
+
+        // Create a Dark theme UI
+        IUIFactory darkFactory = new DarkThemeFactory();
+        Client darkClient = new Client(darkFactory);
+        darkClient.RenderUI();
         Console.WriteLine();
         #endregion
 
@@ -91,27 +122,13 @@ class Program
         Console.WriteLine();
         #endregion
 
-        // Behavioral Patterns
-
-        #region Observer Pattern
-        Console.WriteLine("Executing Observer Pattern >>>>>");
+        // Structural Patterns
+        #region Adapter Pattern
+        Console.WriteLine("Executing Adapter Pattern >>>>>");
         Console.WriteLine("----------------------------------------------------");
-        // Create a stock and two investors (observers).
-        Stock appleStock = new Stock("AAPL", 150.00);
-        Investor investor1 = new Investor("John Doe");
-        Investor investor2 = new Investor("Jane Smith");
-
-        // Register the investors with the stock.
-        appleStock.RegisterObserver(investor1);
-        appleStock.RegisterObserver(investor2);
-
-        // Change the stock price, which will notify the investors.
-        appleStock.Price = 155.00;
-        appleStock.Price = 160.00;
-
-        // Remove one investor and change the price again.
-        appleStock.RemoveObserver(investor1);
-        appleStock.Price = 165.00;
+        // The client expects an ITarget interface
+        ITarget target = new Adapter(new Adaptee());
+        Console.WriteLine(target.GetRequest());
         Console.WriteLine();
         #endregion
 
@@ -132,12 +149,85 @@ class Program
         Console.WriteLine();
         #endregion
 
-        #region Adapter Pattern
-        Console.WriteLine("Executing Adapter Pattern >>>>>");
+        #region Facade Pattern
+        Console.WriteLine("Executing Facade Pattern >>>>>");
         Console.WriteLine("----------------------------------------------------");
-        // The client expects an ITarget interface
-        ITarget target = new Adapter(new Adaptee());
-        Console.WriteLine(target.GetRequest());
+        // Subsystem components
+        DVDPlayer dvdPlayer = new DVDPlayer();
+        Projector projector = new Projector();
+        SoundSystem soundSystem = new SoundSystem();
+
+        // Facade
+        HomeTheaterFacade homeTheater = new HomeTheaterFacade(dvdPlayer, projector, soundSystem);
+
+        // Use the Facade to watch a movie
+        homeTheater.WatchMovie();
+        homeTheater.EndMovie();
+        Console.WriteLine();
+        #endregion
+
+        #region Bridge Pattern
+        Console.WriteLine("Executing Bridge Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // Create shapes with different renderers
+        Shape2 circle = new Circle2(new RasterRenderer(), 5);
+        circle.Draw();
+
+        Shape2 square = new Square2(new VectorRenderer(), 10);
+        square.Draw();
+
+        // Change the renderer for the circle
+        circle = new Circle2(new VectorRenderer(), 7);
+        circle.Draw();
+        Console.WriteLine();
+        #endregion
+
+        #region Composite Pattern
+        Console.WriteLine("Executing Composite Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // Create files
+        FileSystemItem file1 = new DesignPatterns.File("File1.txt");
+        FileSystemItem file2 = new DesignPatterns.File("File2.txt");
+        FileSystemItem file3 = new DesignPatterns.File("File3.txt");
+
+        // Create directories and add files to them
+        DesignPatterns.Directory root = new DesignPatterns.Directory("Root");
+        DesignPatterns.Directory subDir1 = new DesignPatterns.Directory("SubDirectory1");
+        DesignPatterns.Directory subDir2 = new DesignPatterns.Directory("SubDirectory2");
+
+        root.Add(file1);
+        root.Add(subDir1);
+
+        subDir1.Add(file2);
+        subDir1.Add(subDir2);
+
+        subDir2.Add(file3);
+
+        // Display the file system structure
+        root.Display(1);
+        Console.WriteLine();
+        #endregion
+
+        // Behavioral Patterns
+        #region Observer Pattern
+        Console.WriteLine("Executing Observer Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // Create a stock and two investors (observers).
+        Stock appleStock = new Stock("AAPL", 150.00);
+        Investor investor1 = new Investor("John Doe");
+        Investor investor2 = new Investor("Jane Smith");
+
+        // Register the investors with the stock.
+        appleStock.RegisterObserver(investor1);
+        appleStock.RegisterObserver(investor2);
+
+        // Change the stock price, which will notify the investors.
+        appleStock.Price = 155.00;
+        appleStock.Price = 160.00;
+
+        // Remove one investor and change the price again.
+        appleStock.RemoveObserver(investor1);
+        appleStock.Price = 165.00;
         Console.WriteLine();
         #endregion
 
@@ -220,6 +310,56 @@ class Program
         basicHandler.HandleRequest(basicRequest);
         basicHandler.HandleRequest(technicalRequest);
         basicHandler.HandleRequest(billingRequest);
+        Console.WriteLine();
+        #endregion
+
+        #region Template Method Pattern
+        Console.WriteLine("Executing Template Method Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        DataProcessor xmlProcessor = new XMLDataProcessor();
+        xmlProcessor.ProcessData();
+
+        Console.WriteLine();
+
+        DataProcessor jsonProcessor = new JSONDataProcessor();
+        jsonProcessor.ProcessData();
+        Console.WriteLine();
+        #endregion
+
+        #region Memento Pattern
+        Console.WriteLine("Executing Memento Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        var editor = new Editor();
+        var history = new EditorHistory();
+
+        editor.Content = "Version 1";
+        history.Save(editor);
+
+        editor.Content = "Version 2";
+        history.Save(editor);
+
+        editor.Content = "Version 3";
+
+        Console.WriteLine("Current Content: " + editor.Content);
+
+        history.Undo(editor);
+        Console.WriteLine("After Undo: " + editor.Content);
+
+        history.Undo(editor);
+        Console.WriteLine("After Undo: " + editor.Content);
+        Console.WriteLine();
+        #endregion
+
+        #region Interpreter Pattern
+        Console.WriteLine("Executing Interpreter Pattern >>>>>");
+        Console.WriteLine("----------------------------------------------------");
+        // (5 + 10) - (2 + 3)
+        IExpression leftExpression = new AddExpression(new NumberExpression(5), new NumberExpression(10));
+        IExpression rightExpression = new AddExpression(new NumberExpression(2), new NumberExpression(3));
+        IExpression expression = new SubtractExpression(leftExpression, rightExpression);
+
+        int result = expression.Interpret();
+        Console.WriteLine($"Result: {result}");  // Output: Result: 10
         Console.WriteLine();
         #endregion
     }
